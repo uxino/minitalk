@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: museker <museker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 18:28:37 by museker           #+#    #+#             */
-/*   Updated: 2023/08/21 18:35:47 by museker          ###   ########.fr       */
+/*   Created: 2023/08/17 17:39:13 by museker           #+#    #+#             */
+/*   Updated: 2023/08/21 18:35:55 by museker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
 
@@ -41,6 +40,17 @@ int	ft_atoi(const char *str)
 	return (count * sign);
 }
 
+void	mucox18(int a)
+{
+	static int	i = 0;
+
+	if (i == 0 && a == SIGUSR2)
+	{
+		i++;
+		ft_printf("mesaj gönderildi!!\n");
+	}
+}
+
 void	bitwise(int pid, char c)
 {
 	int	i;
@@ -52,6 +62,7 @@ void	bitwise(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
+		signal(SIGUSR2, mucox18);
 		usleep(100);
 		i++;
 	}
